@@ -1,0 +1,23 @@
+# Fungsi untuk login
+def login(username, password):
+    sql = "SELECT * FROM Login WHERE username = %s AND password = %s"
+    cursor.execute(sql, (username, password))
+    result = cursor.fetchone()
+    if result:
+        return result
+    else:
+        return None
+
+# Fungsi untuk mendapatkan data admin
+def get_admin_data():
+    sql = "SELECT * FROM Admin"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    return result
+
+# Fungsi untuk membuat transaksi baru
+def create_transaksi(jenis_transaksi, id_transaksi, tanggal_transaksi, id_customer, id_pesanan, status_transaksi):
+    sql = "INSERT INTO Transaksi (jenis_transaksi, id_transaksi, tanggal_transaksi, id_customer, id_pesanan, status_transaksi) VALUES (%s, %s, %s, %s, %s, %s)"
+    cursor.execute(sql, (jenis_transaksi, id_transaksi, tanggal_transaksi, id_customer, id_pesanan, status_transaksi))
+    db.commit()
+    return cursor.rowcount
